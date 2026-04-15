@@ -6,19 +6,19 @@ for linea in archivo:
     info = linea.strip().split(",")
     datos.append(info)    
 archivo.close()
+return datos 
 #sigue crear las funciones para el menu
 
 
 def buscar(datos, entrada):
     contador = 0
-    for linea in datos:
-        if termino.lower() in linea.lower():
-            partes = linea.strip().split(",")
+    for fila in datos:
+        if termino.lower() in ",".join(fila).lower():
             try:
-                nombre = partes[0]
-                plataforma = partes[1]
-                genero = partes[2]
-                ventas = partes[6]
+                nombre = fila[0]
+                plataforma = fila[1]
+                genero = fila[2]
+                ventas = fila[6]
         
                 print("Juego:", nombre, "| Plataforma:", plataforma, "| Ventas:", ventas)
                 contador += 1
@@ -28,6 +28,7 @@ def buscar(datos, entrada):
     print("\nSe encontraron", contador, "resultados")
 
     def menu():
+        datos = cargar_datos()
     while True:
         print("\n1. Buscar")
         print("2. Estadísticas")
@@ -45,4 +46,6 @@ def buscar(datos, entrada):
             break
         else:
             print("Opción inválida")
+
+menu()
         
