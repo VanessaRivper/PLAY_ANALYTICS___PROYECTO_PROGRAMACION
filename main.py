@@ -2,11 +2,11 @@ def cargar_datos():
     archivo = open("videojuegos50registros.csv", "r", encoding="utf-8")
     print("Archivo abierto correctamente\n")
     datos = []
-for linea in archivo:
-    info = linea.strip().split(",")
-    datos.append(info)    
-archivo.close()
-return datos 
+    for linea in archivo:
+        info = linea.strip().split(",")
+        datos.append(info)    
+    archivo.close()
+    return datos 
 #sigue crear las funciones para el menu
 
 
