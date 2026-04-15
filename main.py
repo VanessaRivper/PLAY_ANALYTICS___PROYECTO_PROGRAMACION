@@ -1,6 +1,6 @@
 try:
     archivo = open("videojuegos50registros.csv", "r", encoding="utf-8")
-    print("Archivo abierto correctamente \n")
+    print("Archivo abierto correctamente\n")
 
     for i in range(5):
         print(archivo.readline())
@@ -8,4 +8,4 @@ try:
     archivo.close()
 
 except:
-    print("Error: no se pudo abrir el archivo ")
+    print("Error: no se pudo abrir el archivo")
