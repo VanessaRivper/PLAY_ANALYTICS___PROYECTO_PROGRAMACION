@@ -1,4 +1,7 @@
-with open("videojuegos50registros.cvs", "r", encoding = "utf-8") as datos
-for linea in datos:
-             datos = linea.split(",")
-             print(datos)
+try:
+  archivo = open("videojuegos50registros.csv", "r", encoding = "utf-8")
+  print(Archivo abierto)
+  for i in range(5):
+    print(archivo.readline())
+    archivo.close()
+    
