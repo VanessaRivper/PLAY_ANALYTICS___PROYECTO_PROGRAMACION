@@ -1,5 +1,7 @@
-archivo = open("videojuego50registros.csv", "r")
+archivo = open("videojuegos50registros.csv", "r", encoding="utf-8")
+print("Archivo abierto correctamente\n")
 
-for linea in archivo:
-    print(linea)
+for i in range(5):
+    print(archivo.readline())
 
+archivo.close()
