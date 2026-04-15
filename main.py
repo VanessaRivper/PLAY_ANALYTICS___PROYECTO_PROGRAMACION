@@ -13,9 +13,9 @@ def cargar_datos():
 def buscar(datos, termino):
     contador = 0
 
-    for linea in datos:
-        if termino.lower() in linea.lower():
-            partes = linea.strip().split(",")
+    for fila in datos:
+        texto = ",".join(fila).lower()
+        if termino.lower() in texto:
 
             try:
                 nombre = partes[0]
