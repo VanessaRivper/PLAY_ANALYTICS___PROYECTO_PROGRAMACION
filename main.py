@@ -26,7 +26,7 @@ def estadisticas(datos):
     total = len(datos)
     print(f"\nTotal de videojuegos en la base: {total}")
 def filtrar(datos):
-    p = input("Escribe la plataforma a filtrar (ej: Wii, NES): ")
+    p = input("Escribe la plataforma que quieres filtrar: ")
     for fila in datos:
         if p.lower() in fila[1].lower():
             print(f"Encontrado: {fila[0]}")
