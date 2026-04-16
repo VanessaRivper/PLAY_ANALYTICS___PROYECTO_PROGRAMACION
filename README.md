@@ -30,7 +30,7 @@
 
 🎮Objetivo:
 
-  Desarrollar un programa en consola que permita explorar el Dataset de videojuegos mediante un menú interactivo, facilitando   la búsqueda y el análisis básico de la información, utilizando estructuras fundamentales de programación como condicionales,   búcles, manejo de strings y funciones. 
+  Desarrollar un programa en consola que permita explorar el Dataset de videojuegos mediante un menú interactivo, facilitando   la búsqueda y el análisis básico de la información, utilizando estructuras fundamentales de programación como condicionales,   bucles, manejo de strings y funciones. 
 
 🎮Funciones del programa:
 
