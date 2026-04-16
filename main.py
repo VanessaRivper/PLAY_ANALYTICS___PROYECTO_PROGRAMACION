@@ -2,6 +2,7 @@ def cargar_datos():
     archivo = open("videojuegos50registros.csv", "r", encoding="utf-8")
     print("Archivo abierto correctamente\n")
     datos = []
+    next(archivo) # saltar encabezado 
     for linea in archivo:
         info = linea.strip().split(",")
         datos.append(info)    
@@ -24,12 +25,25 @@ def buscar(datos, termino):
     print("\nSe encontraron", contador, "resultados")
 def estadisticas(datos):
     total = len(datos)
-    print(f"\nTotal de videojuegos en la base: {total}")
+    suma = 0
+    for fila in datos:
+        try:
+            suma += float(fila[6])
+        except:
+            continue
+    promedio = suma / total
+        print(f"\nTotal de videojuegos: {total}")
+    print(f"Ventas totales: {round(suma,2)} millones")
+    print(f"Promedio de ventas: {round(promedio,2)} millones")
+
 def filtrar(datos):
     p = input("Escribe la plataforma que quieres filtrar: ")
+    encontrados = 0
     for fila in datos:
         if p.lower() in fila[1].lower():
-            print(f"Encontrado: {fila[0]}")
+            print("Juego:", fila[0], "| Plataforma:", fila[1], "| Ventas:", fila[6])
+            encontrados += 1
+        print(f"\nSe encontraron {encontrados} juegos")
 def menu():
     datos = cargar_datos()
     while True:
