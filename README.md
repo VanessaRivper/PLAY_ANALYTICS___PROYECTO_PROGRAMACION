@@ -34,8 +34,8 @@
 
 🎮Funciones del programa:
 
-  Permite buscar registros a partir de un término ingresado por el usuario, incluye funcionalidades estadísticas básicas y opciones de ____
-
+  Nuestro programa le permite al usuario explorar dentro del dataset de manera rápida, a través de un menú, la acción que desea realizar. A partir de esta selección, nuestros usuarios podrán tener estadísticas basicas de la informacion recolectada y filtrar los datos según condiciones definidas por el usuario y finalmente, permite al usuario continuar explorando o sali del programa. La mejor manera de conocer y comprender la evolución y trayectoria de los videojuegos.
+  
 🎮Cómo correr el programa:
   1. Descargar el repositorio.
   2. Abrir la carpeta en Visual Studio Code.
@@ -44,4 +44,4 @@
 
 🎮Estado del proyecto:
 
-  Entrega 1: Actualmente el programa permite leer el dataset, realizar busquedas, estadísticas y ____.
+  Entrega 1: Actualmente el programa permite leer el dataset, realizar busquedas dentro de este, conocer estadísticas y obtener informacion de interes a partir de filtros específicos.
