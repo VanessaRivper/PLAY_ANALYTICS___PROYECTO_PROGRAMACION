@@ -2,7 +2,7 @@ def cargar_datos():
     archivo = open("videojuegos50registros.csv", "r", encoding="utf-8")
     print("Archivo abierto correctamente\n")
     datos = []
-    next(archivo) # saltar encabezado 
+    next(archivo)  
     for linea in archivo:
         info = linea.strip().split(",")
         datos.append(info)    
@@ -36,8 +36,8 @@ def estadisticas(datos):
     print(f"Ventas totales: {round(suma,2)} millones")
     print(f"Promedio de ventas: {round(promedio,2)} millones")
 def filtrar(datos):
-    input("PS3", "PS4", "PS2", "X360", "XOne", "PC", "PSP", "Wii")
-    p = input("Escribe lo que quieras filtrar: ").strip()
+     print("Consolas: PS3, PS4, PS2, X360, XOne, PC, PSP, Wii")
+    p = input("De las anteriores consolas ingresa la quieras filtrar: ").strip()
     contador = 0
     for fila in datos:
         if p.lower() in fila[1].lower():
