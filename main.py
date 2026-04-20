@@ -36,6 +36,7 @@ def estadisticas(datos):
     print(f"Ventas totales: {round(suma,2)} millones")
     print(f"Promedio de ventas: {round(promedio,2)} millones")
 def filtrar(datos):
+    input("PS3", "PS4", "PS2", "X360", "XOne", "PC", "PSP", "Wii")
     p = input("Escribe lo que quieras filtrar: ").strip()
     contador = 0
     for fila in datos:
