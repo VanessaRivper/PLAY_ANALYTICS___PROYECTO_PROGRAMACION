@@ -45,3 +45,5 @@
 🎮Estado del proyecto:
 
   Entrega 1: Actualmente el programa permite leer el dataset, realizar busquedas dentro de este, conocer estadísticas y obtener informacion de interes a partir de filtros específicos.
+
+ 🎮 By PLAY ANALYTICS 🎮
