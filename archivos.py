@@ -32,9 +32,7 @@ def guardar_hist(consulta, cantidad):
 def guardar_csv(nombre, datos):
   archivo = open(nombre, "w", newline = "", encoding = "utf-8")
   escritor = csv.writer(archivo)
-
-for fila in datos:
-
-  escritor.writerow(fila)
-
-archivo.close()
+  for fila in datos:
+    escritor.writerow(fila)
+  
+  archivo.close()
