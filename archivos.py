@@ -47,4 +47,3 @@ def ver_historial():
       archivo.close()
   except:
     print("No hay historial guardado")
-      archivo.close()
