@@ -30,20 +30,24 @@ def estadisticas(datos):
     total = len(datos)
     suma = 0
     cantidad = 0
-    
+    plataformas = set()
     for fila in datos:
         try:
             suma += float(fila[6])
             cantidad += 1
-            
+            plataformas.add(fila[1])
         except:
             continue
             
-    promedio = suma / cantidad
+    if cantidad > 0:
+        promedio = suma / cantidad
+    else:
+        promedio = 0
     
     print(f"\nTotal de videojuegos: {total}")
     print(f"Ventas totales: {round(suma,2)} millones")
     print(f"Promedio de ventas: {round(promedio,2)} millones")
+    print(f"Plataformas únicas: {len(plataformas)}")
 
 
 def filtrar(datos):
