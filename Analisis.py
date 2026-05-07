@@ -29,14 +29,18 @@ def buscar(datos, termino):
 def estadisticas(datos):
     total = len(datos)
     suma = 0
+    cantidad = 0
     
     for fila in datos:
         try:
             suma += float(fila[6])
+            cantidad += 1
+            
         except:
             continue
             
-    promedio = suma / total
+    promedio = suma / cantidad
+    
     print(f"\nTotal de videojuegos: {total}")
     print(f"Ventas totales: {round(suma,2)} millones")
     print(f"Promedio de ventas: {round(promedio,2)} millones")
