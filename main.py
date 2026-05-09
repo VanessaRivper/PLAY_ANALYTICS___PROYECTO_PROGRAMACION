@@ -4,14 +4,17 @@ from analisis import *
 datos = cargar_datos()
 
 while True:
-    print("\n---- MENÚ ----")
-    print("1. Buscar")
-    print("2. Estadísticas") 
-    print("3. Filtrar")
-    print("4. Historial")
-    print("5. Salir")
+    print("+-----------------------------+")
+    print("|            MENÚ             |")
+    print("+-----------------------------+")
+    print("|        1. Buscar            |")
+    print("|        2. Estadísticas      |") 
+    print("|        3. Filtrar           |")
+    print("|        4. Historial         |")
+    print("|        5. Salir             |")
+    print("+-----------------------------+")
     
-    opcion = input("Elige una opción: ")
+    opcion = input("\n Seleccione una opción: ")
     
     if opcion == "1":
         entrada = input("Ingrese búsqueda: ")
@@ -24,18 +27,20 @@ while True:
         
     elif opcion == "2":
         estadisticas(datos)
-        guardar_hist("estadísticas", 1)
+        guardar_hist("Estadísticas", 1)
         
     elif opcion == "3":
         resultados = filtrar(datos)
-        guardar_hist("filtro", len(resultados))
+        if resultados:
+        guardar_hist(f"Filtro", len(resultados))
 
     elif opcion == "4":
         ver_historial()
                           
     elif opcion == "5":
-        print("¡Adiós! El programa ha finalizado")  
+        print("\n¡Adiós! El programa ha finalizado")  
         break
     else:
         print("Opción inválida")
-        
+
+    input("\nPresione Enter para continuar ")
