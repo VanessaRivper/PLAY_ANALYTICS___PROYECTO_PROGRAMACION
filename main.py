@@ -4,15 +4,16 @@ from analisis import *
 datos = cargar_datos()
 
 while True:
-    print("+-----------------------------+")
-    print("|            MENÚ             |")
-    print("+-----------------------------+")
-    print("|        1. Buscar            |")
-    print("|        2. Estadísticas      |") 
-    print("|        3. Filtrar           |")
-    print("|        4. Historial         |")
-    print("|        5. Salir             |")
-    print("+-----------------------------+")
+    print("+----------------------------------+")
+    print("|            MENÚ                  |")
+    print("+----------------------------------+")
+    print("|        1. Buscar                 |")
+    print("|        2. Estadísticas           |") 
+    print("|        3. Filtrar                |")
+    print("|        4. Historial              |")
+    print("|        5. Comparar plataformas   |")
+    print("|        6. Salir                  |")
+    print("+----------------------------------+")
     
     opcion = input("\n Seleccione una opción: ")
     
@@ -36,8 +37,11 @@ while True:
 
     elif opcion == "4":
         ver_historial()
-                          
+
     elif opcion == "5":
+        comparar(datos)
+                
+    elif opcion == "6":
         print("\n¡Adiós! El programa ha finalizado")  
         break
     else:
