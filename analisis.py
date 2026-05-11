@@ -76,3 +76,49 @@ def filtrar(datos):
     else:
          print(f"\nTotal encontrado: {contador} registros.")
     return resultados
+def comparar(datos):
+
+    p1 = input("Ingrese la primera plataforma: ")
+    p2 = input("Ingrese la segunda plataforma: ")
+
+    suma1 = 0
+    suma2 = 0
+
+    c1 = 0
+    c2 = 0
+
+    for fila in datos:
+
+        try:
+
+            plataforma = fila[1]
+            ventas = float(fila[6])
+
+            if p1.lower() == plataforma.lower():
+                suma1 += ventas
+                c1 += 1
+
+            if p2.lower() == plataforma.lower():
+                suma2 += ventas
+                c2 += 1
+
+        except:
+            continue
+
+    print("\n--- RESULTADOS ---")
+
+    if c1 > 0:
+        print(p1)
+        print("Cantidad:", c1)
+        print("Promedio ventas:", round(suma1 / c1, 2))
+
+    if c2 > 0:
+        print("\n" + p2)
+        print("Cantidad:", c2)
+        print("Promedio ventas:", round(suma2 / c2, 2))
+
+    if c1 == 0:
+        print("\nNo se encontraron juegos para", p1)
+
+    if c2 == 0:
+        print("\nNo se encontraron juegos para", p2)
