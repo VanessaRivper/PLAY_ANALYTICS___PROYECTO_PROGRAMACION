@@ -33,7 +33,7 @@ while True:
     elif opcion == "3":
         resultados = filtrar(datos)
         if resultados:
-        guardar_hist(f"Filtro", len(resultados))
+            guardar_hist(f"Filtro", len(resultados))
 
     elif opcion == "4":
         ver_historial()
