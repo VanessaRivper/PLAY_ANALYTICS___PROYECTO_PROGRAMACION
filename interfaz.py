@@ -33,4 +33,10 @@ class ventana(QWidget):
     b_filtrar.clicked.connect(self.realizar_filtro)
     layout.addWidget(b_filtrar)
 
+    self.resultados_txt = QTextEdit()
+    self.resultados_txt.setReadOnly(True)
+    layout.addWidget(self.resultados_txt)    
+
+    self.setLayout(layout)
+
     
