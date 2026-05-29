@@ -1,4 +1,4 @@
-from PyQt.QtWidgets import *
+from PyQt5.QtWidgets import *
 from analisis import *
 from archivos import *
 
@@ -18,7 +18,7 @@ class ventana(QWidget):
     tit = QLabel("PLAY ANALYTICS")
     layout.addWidget(tit)
     self.entrada = QLineEdit()
-    self.emtrada.setPlaceholderText("Buscar videojuegos o consola")
+    self.entrada.setPlaceholderText("Buscar videojuegos o consola")
     layout.addWidget(self.entrada)
     
     b_buscar = QPushButton("Buscar")
