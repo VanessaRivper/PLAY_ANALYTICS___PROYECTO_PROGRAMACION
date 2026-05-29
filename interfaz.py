@@ -39,4 +39,21 @@ class ventana(QWidget):
 
     self.setLayout(layout)
 
+  def realizar_busqueda(self):
+        termino = self.entrada.text().strip()
+        if not termino:
+            QMessageBox.warning(self, "Advertencia", "Por favor, ingresa un término de búsqueda.")
+            return
+            
+        resultados = buscar(self.datos, termino)
+        guardar_hist(termino, len(resultados))
+        
+
+        self.resultados_txt.clear()
+        self.resultados_txt.append(f"--- RESULTADOS DE BÚSQUEDA PARA '{termino}' ({len(resultados)} encontrados) ---\n")
+        
+        for fila in resultados:
+            nombre = fila[0][:38] + "..." if len(fila[0]) > 38 else fila[0]
+            self.resultados_txt.append(f"Juego: {nombre:<42} | Plataforma: {fila[1]:<6} | Ventas: {fila[6]}")
+
     
