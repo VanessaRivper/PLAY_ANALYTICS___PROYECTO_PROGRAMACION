@@ -2,10 +2,9 @@ from PyQt5.QtWidgets import *
 from analisis import *
 from archivos import *
 
-import pandas as pd
 import matplotlib.pyplot as plt
 
-class ventana(QWidget):
+class Ventana(QWidget):
   def __init__(self):
     super().__init__()
     self.setWindowTitle("PLAY ANALYTICS")
@@ -86,7 +85,11 @@ class ventana(QWidget):
             except:
                 continue
 
-        promedio = suma / cantidad
+        if cantidad > 0:
+          promedio = suma / cantidad
+        else:
+          promedio = 0
+          
 
         self.resultados_txt.clear()
         self.resultados_txt.append("ESTADÍSTICAS\n")
