@@ -74,10 +74,8 @@ class ventana(QWidget):
             nombre = fila[0][:38] + "..." if len(fila[0]) > 38 else fila[0]
             self.resultados_txt.append(f"Juego: {nombre:<42} | Plataforma: {fila[1]:<6} | Ventas: {fila[6]}")
 
-def mostrar_estadisticas(self):
-
+  def mostrar_estadisticas(self):
         total = len(self.datos)
-
         suma = 0
         cantidad = 0
 
@@ -100,7 +98,7 @@ def mostrar_estadisticas(self):
 
 
 
-    def realizar_filtro(self):
+  def realizar_filtro(self):
 
         plataforma = self.entrada.text().strip()
         if not plataforma:
@@ -131,7 +129,7 @@ def mostrar_estadisticas(self):
 
 
 
-    def mostrar_historial(self):
+  def mostrar_historial(self):
 
         self.resultados_txt.clear()
         try:
@@ -144,7 +142,7 @@ def mostrar_estadisticas(self):
 
 
 
-    def comparar_plataformas(self):
+  def comparar_plataformas(self):
 
         texto = self.entrada.text().strip()
         if "," not in texto:
@@ -188,7 +186,7 @@ def mostrar_estadisticas(self):
             )
 
 
-    def mostrar_grafico(self):
+  def mostrar_grafico(self):
 
         plataformas = {}
         
