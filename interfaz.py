@@ -136,10 +136,9 @@ class Ventana(QWidget):
 
         self.resultados_txt.clear()
         try:
-            archivo = open("historial.csv", "r", encoding="utf-8")
-            for linea in archivo:
-                self.resultados_txt.append(linea)
-            archivo.close()
+            with open("historial.csv", "r", encoding="utf-8") as archivo:
+                for linea in archivo:
+                    self.resultados_txt.append(linea)
         except:
             self.resultados_txt.append("No hay historial")
 
@@ -156,22 +155,19 @@ class Ventana(QWidget):
             )
             return
 
-        p1, p2 = texto.split(",")
-
-        suma1 = 0
-        suma2 = 0
-
-        c1 = 0
-        c2 = 0
+        p1 = partes[0].strip().lower()
+        p2 = partes[1].strip().lower()
+        suma1, suma2 = 0, 0
+        c1, c2 = 0, 0
 
         for fila in self.datos:
             try:
-                plataforma = fila[1]
+                plataforma = fila[1].lower()
                 ventas = float(fila[6])
-                if p1.lower().strip() == plataforma.lower():
+                if p1 == plataforma: 
                     suma1 += ventas
                     c1 += 1
-                if p2.lower().strip() == plataforma.lower():
+                else p2  == plataforma: 
                     suma2 += ventas
                     c2 += 1
             except:
@@ -180,13 +176,14 @@ class Ventana(QWidget):
         self.resultados_txt.clear()
         self.resultados_txt.append("COMPARACIÓN\n")
         if c1 > 0:
-            self.resultados_txt.append(
-                f"{p1} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}"
-            )
+              self.resultados_txt.append(f"{p1.upper()} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}")
+        else:
+              self.resultados_txt.append(f"{p1.upper()} -> No se encontraron registros.")
+              
         if c2 > 0:
-            self.resultados_txt.append(
-                f"{p2} -> Juegos: {c2} | Promedio ventas: {round(suma2/c2,2)}"
-            )
+              self.resultados_txt.append(f"{p2.upper()} -> Juegos: {c2} | Promedio ventas: {round(suma2/c2,2)}")
+        else:
+              self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
 
 
   def mostrar_grafico(self):
@@ -202,11 +199,13 @@ class Ventana(QWidget):
                     plataformas[plataforma] = 1
             except:
                 continue
-        nombres = list(plataformas.keys())[:10]
-        cantidades = list(plataformas.values())[:10]
+
+        plataformas_ordenadas = sorted(plataformas.items(), key=lambda x: x[1], reverse=True)[:10]
+        nombres = [item[0] for item in plataformas_ordenadas]
+        cantidades = [item[1] for item in plataformas_ordenadas]
         plt.figure(figsize=(10,5))
-        plt.bar(nombres, cantidades)
+        plt.bar(nombres, cantidades, color='#A9DFBF')
         plt.title("Cantidad de videojuegos por plataforma")
         plt.xlabel("Plataformas")
-        plt.ylabel("Cantidad")
+        plt.ylabel("Cantidad de titulos")
         plt.show()
