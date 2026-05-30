@@ -19,8 +19,7 @@ class Ventana(QWidget):
     
     self.entrada = QLineEdit()
     self.entrada.setPlaceholderText("Buscar videojuegos o consola")
-    layout.addWidget(self.entrada)
-    #Botones 
+    layout.addWidget(self.entrada) 
     
     b_buscar = QPushButton("Buscar")
     b_buscar.clicked.connect(self.realizar_busqueda)
@@ -99,8 +98,6 @@ class Ventana(QWidget):
 
         guardar_hist("estadisticas", 1)
 
-
-
   def realizar_filtro(self):
 
         plataforma = self.entrada.text().strip()
@@ -154,7 +151,8 @@ class Ventana(QWidget):
                 "Ingrese dos plataformas separadas por coma.\nEjemplo: PS3,PS4"
             )
             return
-
+  
+        partes = texto.split(",")
         p1 = partes[0].strip().lower()
         p2 = partes[1].strip().lower()
         suma1, suma2 = 0, 0
@@ -167,7 +165,7 @@ class Ventana(QWidget):
                 if p1 == plataforma: 
                     suma1 += ventas
                     c1 += 1
-                else p2  == plataforma: 
+                elif p2  == plataforma: 
                     suma2 += ventas
                     c2 += 1
             except:
@@ -204,7 +202,7 @@ class Ventana(QWidget):
         nombres = [item[0] for item in plataformas_ordenadas]
         cantidades = [item[1] for item in plataformas_ordenadas]
         plt.figure(figsize=(10,5))
-        plt.bar(nombres, cantidades, color='#A9DFBF')
+        plt.bar(nombres, cantidades, color ='#A9DFBF')
         plt.title("Cantidad de videojuegos por plataforma")
         plt.xlabel("Plataformas")
         plt.ylabel("Cantidad de titulos")
