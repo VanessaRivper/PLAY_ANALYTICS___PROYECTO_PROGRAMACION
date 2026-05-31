@@ -4,12 +4,9 @@ from datetime import datetime
 
 
 def cargar_datos():
-  
   datos = []
-
   df = pd.read_csv("Video_Games_Sales.csv")
-
-    return df.values.tolist()
+  return df.values.tolist()
 
   for fila in lector:
     datos.append(fila)
