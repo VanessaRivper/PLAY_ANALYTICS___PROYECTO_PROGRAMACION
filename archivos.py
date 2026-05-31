@@ -8,12 +8,6 @@ def cargar_datos():
   df = pd.read_csv("Video_Games_Sales.csv")
   return df.values.tolist()
 
-  for fila in lector:
-    datos.append(fila)
-  
-  archivo.close()
-  return datos
-
 def guardar_hist(consulta, cantidad):
   archivo = open("historial.csv", "a", newline = "", encoding = "utf-8")
 
