@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 class Ventana(QWidget):
   def __init__(self):
     super().__init__()
-    self.setWindowTitle("PLAY ANALYTICS")
+    self.setWindowTitle("PLAY ANALYTICS - Grupo 2")
     self.resize(700, 500)
     self.datos = cargar_datos()
     self.crear_interfaz()
