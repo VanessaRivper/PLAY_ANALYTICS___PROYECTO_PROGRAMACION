@@ -211,12 +211,13 @@ class Ventana(QWidget):
         plt.xlabel("Plataformas")
         plt.ylabel("Cantidad de titulos")
         plt.show()
-    def mostrar_grafico_ventas(self):
+    
+  def mostrar_grafico_ventas(self):
 
-    ventas = {}
+        ventas = {}
 
-    for fila in self.datos:
-        try:
+        for fila in self.datos:
+          try:
             plataforma = fila[1]
             venta = float(fila[6])
 
@@ -225,16 +226,22 @@ class Ventana(QWidget):
             else:
                 ventas[plataforma] = venta
 
-        except:
+          except:
             continue
 
-    nombres = list(ventas.keys())[:10]
-    totales = list(ventas.values())[:10]
+        ventas_ordenadas = sorted(
+            ventas.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )[:10]
 
-    plt.figure(figsize=(10,5))
-    plt.plot(nombres, totales, marker="o")
-    plt.title("Ventas totales por plataforma")
-    plt.xlabel("Plataformas")
-    plt.ylabel("Ventas")
-    plt.show()
+        nombres = [item[0] for item in ventas_ordenadas]
+        totales = [item[1] for item in ventas_ordenadas]
+
+        plt.figure(figsize=(10,5))
+        plt.plot(nombres, totales, marker="o")
+        plt.title("Ventas totales por plataforma")
+        plt.xlabel("Plataformas")
+        plt.ylabel("Ventas")
+        plt.show()
       
