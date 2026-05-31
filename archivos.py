@@ -34,6 +34,7 @@ def guardar_csv(nombre, datos):
   escritor = csv.writer(archivo)
   for fila in datos:
     escritor.writerow(fila)
+  archivo.close()
 
 def ver_historial():
   try:
