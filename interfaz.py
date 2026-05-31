@@ -137,14 +137,14 @@ class Ventana(QWidget):
       self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
 
 
-  def mostrar_grafico(self):
+  def mostrar_grafico_general(self):
     nombres, cantidades = grafico_cantidad(self.datos)
     
     plt.figure(figsize=(10,5))
     plt.bar(nombres, cantidades, color ='#A9DFBF')
     plt.title("Cantidad de videojuegos por plataforma")
     plt.xlabel("Plataformas")
-    plt.ylabel("Cantidad de titulos")
+    plt.ylabel("Cantidad de Videojuegos")
     plt.show()
     
   def mostrar_grafico_ventas(self):
