@@ -137,7 +137,7 @@ class Ventana(QWidget):
       self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
 
 
-  def mostrar_grafico_general(self):
+  def mostrar_grafico(self):
     nombres, cantidades = grafico_cantidad(self.datos)
     
     plt.figure(figsize=(10,5))
