@@ -11,6 +11,7 @@ class Ventana(QWidget):
     self.resize(700, 500)
     self.datos = cargar_datos()
     self.crear_interfaz()
+    self.ultimos_resultados = []
   
   def crear_interfaz(self):
     layout = QVBoxLayout()
@@ -33,10 +34,6 @@ class Ventana(QWidget):
     b_filtrar.clicked.connect(self.realizar_filtro)
     layout.addWidget(b_filtrar)
 
-    b_historial = QPushButton("Ver historial")
-    b_historial.clicked.connect(self.mostrar_historial)
-    layout.addWidget(b_historial)
-
     b_comparar = QPushButton("Comparar plataformas")
     b_comparar.clicked.connect(self.comparar_plataformas)
     layout.addWidget(b_comparar)
@@ -48,7 +45,11 @@ class Ventana(QWidget):
     b_grafico2 = QPushButton("Gráfico de ventas")
     b_grafico2.clicked.connect(self.mostrar_grafico_ventas)
     layout.addWidget(b_grafico2)
-    
+
+    b_exportar = QPushButton("Exportar CSV")
+    b_exportar.clicked.connect(self.exportar_csv)
+    layout.addWidget(b_exportar)
+
     b_salir = QPushButton("Salir")
     b_salir.clicked.connect(self.close)
     layout.addWidget(b_salir)
@@ -66,7 +67,7 @@ class Ventana(QWidget):
             return
             
         resultados = buscar(self.datos, termino)
-        guardar_hist(termino, len(resultados))
+        self.ultimos_resultados = resultados
         
 
         self.resultados_txt.clear()
@@ -100,7 +101,6 @@ class Ventana(QWidget):
         self.resultados_txt.append(f"Ventas totales: {round(suma,2)} millones")
         self.resultados_txt.append(f"Promedio ventas: {round(promedio,2)} millones")
 
-        guardar_hist("estadisticas", 1)
 
   def realizar_filtro(self):
 
@@ -129,21 +129,8 @@ class Ventana(QWidget):
         self.resultados_txt.append(
             f"\nTotal encontrados: {len(resultados)}"
         )
-        guardar_hist("filtro", len(resultados))
-
-
-
-  def mostrar_historial(self):
-
-        self.resultados_txt.clear()
-        try:
-            with open("historial.csv", "r", encoding="utf-8") as archivo:
-                for linea in archivo:
-                    self.resultados_txt.append(linea)
-        except:
-            self.resultados_txt.append("No hay historial")
-
-
+        self.ultimos_resultados = resultados
+       
 
   def comparar_plataformas(self):
 
@@ -244,4 +231,22 @@ class Ventana(QWidget):
         plt.xlabel("Plataformas")
         plt.ylabel("Ventas")
         plt.show()
-      
+
+
+  def exportar_csv(self):
+
+    try:
+        guardar_csv("Resultados.csv", self.ultimos_resultados)
+
+        QMessageBox.information(
+            self,
+            "Éxito",
+            "Resultados exportados correctamente"
+        )
+
+    except:
+        QMessageBox.warning(
+            self,
+            "Error",
+            "No hay resultados para exportar"
+        )
