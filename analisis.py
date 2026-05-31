@@ -105,6 +105,63 @@ def comparar(datos):
         except:
             continue
 
+def grafico_cantidad(datos):
+
+    plataformas = {}
+
+    for fila in datos:
+        try:
+            plataforma = fila[1]
+
+            if plataforma in plataformas:
+                plataformas[plataforma] += 1
+            else:
+                plataformas[plataforma] = 1
+
+        except:
+            continue
+
+    plataformas_ordenadas = sorted(
+        plataformas.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )[:10]
+
+    nombres = [item[0] for item in plataformas_ordenadas]
+    cantidades = [item[1] for item in plataformas_ordenadas]
+
+    return nombres, cantidades
+
+
+def grafico_ventas(datos):
+
+    ventas = {}
+
+    for fila in datos:
+
+        try:
+            plataforma = fila[1]
+            venta = float(fila[6])
+
+            if plataforma in ventas:
+                ventas[plataforma] += venta
+            else:
+                ventas[plataforma] = venta
+
+        except:
+            continue
+
+    ventas_ordenadas = sorted(
+        ventas.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )[:10]
+
+    nombres = [item[0] for item in ventas_ordenadas]
+    totales = [item[1] for item in ventas_ordenadas]
+
+    return nombres, totales
+
     print("\n--- RESULTADOS ---")
 
     if c1 > 0:
