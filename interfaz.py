@@ -99,7 +99,7 @@ class Ventana(QWidget):
                           "Ingrese una plataforma"
                          )
       return
-    resultados = filtrar_plataforma(self.datos, plataforma)
+    resultados = filtrar(self.datos)
     self.resultados_txt.clear()
 
     for fila in resultados:
