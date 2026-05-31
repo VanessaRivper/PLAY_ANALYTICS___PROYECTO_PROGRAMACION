@@ -45,9 +45,8 @@ def estadisticas(datos):
         promedio = 0
     return total, suma, promedio
 
-def filtrar(datos):
+def filtrar(datos, p):
     resultados = []
-    contador = 0
     
     for fila in datos:
         try:
