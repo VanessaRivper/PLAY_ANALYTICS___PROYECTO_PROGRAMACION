@@ -138,7 +138,7 @@ class Ventana(QWidget):
 
 
   def mostrar_grafico(self):
-    datos = datos_grafico_cantidad(self.datos)
+    datos = grafico_cantidad(self.datos)
     
     nombres = [item[0] for item in datos]
     cantidades = [item[1] for item in datos]
@@ -151,7 +151,7 @@ class Ventana(QWidget):
     plt.show()
     
   def mostrar_grafico_ventas(self):
-    datos = datos_grafico_ventas(self.datos) 
+    datos = grafico_ventas(self.datos) 
     
     nombres = [item[0] for item in datos]
     totales = [item[1] for item in datos]
