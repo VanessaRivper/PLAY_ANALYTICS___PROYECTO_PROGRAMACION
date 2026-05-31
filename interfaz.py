@@ -46,6 +46,10 @@ class Ventana(QWidget):
     b_grafico2.clicked.connect(self.mostrar_grafico_ventas)
     layout.addWidget(b_grafico2)
 
+    b_historial = QPushButton("Ver historial")
+    b_historial.clicked.connect(self.mostrar_historial)
+    layout.addWidget(b_historial)
+
     b_exportar = QPushButton("Exportar CSV")
     b_exportar.clicked.connect(self.exportar_csv)
     layout.addWidget(b_exportar)
@@ -68,7 +72,7 @@ class Ventana(QWidget):
             
         resultados = buscar(self.datos, termino)
         self.ultimos_resultados = resultados
-        
+        guardar_hist(termino, len(resultados))
 
         self.resultados_txt.clear()
         self.resultados_txt.append(f"--- RESULTADOS DE BÚSQUEDA PARA '{termino}' ({len(resultados)} encontrados) ---\n")
@@ -100,7 +104,7 @@ class Ventana(QWidget):
         self.resultados_txt.append(f"Total videojuegos: {total}")
         self.resultados_txt.append(f"Ventas totales: {round(suma,2)} millones")
         self.resultados_txt.append(f"Promedio ventas: {round(promedio,2)} millones")
-
+        guardar_hist("estadisticas", 1)
 
   def realizar_filtro(self):
 
@@ -130,7 +134,7 @@ class Ventana(QWidget):
             f"\nTotal encontrados: {len(resultados)}"
         )
         self.ultimos_resultados = resultados
-       
+        guardar_hist("filtro", len(resultados))
 
   def comparar_plataformas(self):
 
@@ -232,6 +236,22 @@ class Ventana(QWidget):
         plt.ylabel("Ventas")
         plt.show()
 
+  def mostrar_historial(self):
+
+    self.resultados_txt.clear()
+
+    try:
+        archivo = open("historial.csv", "r", encoding="utf-8")
+
+        self.resultados_txt.append("HISTORIAL\n")
+
+        for linea in archivo:
+            self.resultados_txt.append(linea.strip())
+
+        archivo.close()
+
+    except:
+        self.resultados_txt.append("No hay historial guardado")
 
   def exportar_csv(self):
 
