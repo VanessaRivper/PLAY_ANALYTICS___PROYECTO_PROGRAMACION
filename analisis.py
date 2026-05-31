@@ -76,6 +76,7 @@ def filtrar(datos):
     else:
          print(f"\nTotal encontrado: {contador} registros.")
     return resultados
+    
 def comparar(datos):
 
     p1 = input("Ingrese la primera plataforma: ")
@@ -104,6 +105,23 @@ def comparar(datos):
 
         except:
             continue
+        print("\n--- RESULTADOS ---")
+
+    if c1 > 0:
+        print(p1)
+        print("Cantidad:", c1)
+        print("Promedio ventas:", round(suma1 / c1, 2))
+
+    if c2 > 0:
+        print("\n" + p2)
+        print("Cantidad:", c2)
+        print("Promedio ventas:", round(suma2 / c2, 2))
+
+    if c1 == 0:
+        print("\nNo se encontraron juegos para", p1)
+
+    if c2 == 0:
+        print("\nNo se encontraron juegos para", p2)
 
 def grafico_cantidad(datos):
 
@@ -162,20 +180,4 @@ def grafico_ventas(datos):
 
     return nombres, totales
 
-    print("\n--- RESULTADOS ---")
 
-    if c1 > 0:
-        print(p1)
-        print("Cantidad:", c1)
-        print("Promedio ventas:", round(suma1 / c1, 2))
-
-    if c2 > 0:
-        print("\n" + p2)
-        print("Cantidad:", c2)
-        print("Promedio ventas:", round(suma2 / c2, 2))
-
-    if c1 == 0:
-        print("\nNo se encontraron juegos para", p1)
-
-    if c2 == 0:
-        print("\nNo se encontraron juegos para", p2)
