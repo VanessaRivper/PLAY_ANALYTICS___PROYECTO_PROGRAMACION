@@ -44,7 +44,11 @@ class Ventana(QWidget):
     b_grafico = QPushButton("Mostrar gráfico")
     b_grafico.clicked.connect(self.mostrar_grafico)
     layout.addWidget(b_grafico)
-
+    
+    b_grafico2 = QPushButton("Gráfico de ventas")
+    b_grafico2.clicked.connect(self.mostrar_grafico_ventas)
+    layout.addWidget(b_grafico2)
+    
     b_salir = QPushButton("Salir")
     b_salir.clicked.connect(self.close)
     layout.addWidget(b_salir)
@@ -207,3 +211,30 @@ class Ventana(QWidget):
         plt.xlabel("Plataformas")
         plt.ylabel("Cantidad de titulos")
         plt.show()
+    def mostrar_grafico_ventas(self):
+
+    ventas = {}
+
+    for fila in self.datos:
+        try:
+            plataforma = fila[1]
+            venta = float(fila[6])
+
+            if plataforma in ventas:
+                ventas[plataforma] += venta
+            else:
+                ventas[plataforma] = venta
+
+        except:
+            continue
+
+    nombres = list(ventas.keys())[:10]
+    totales = list(ventas.values())[:10]
+
+    plt.figure(figsize=(10,5))
+    plt.plot(nombres, totales, marker="o")
+    plt.title("Ventas totales por plataforma")
+    plt.xlabel("Plataformas")
+    plt.ylabel("Ventas")
+    plt.show()
+      
