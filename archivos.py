@@ -1,12 +1,23 @@
 import csv
-import pandas as pd
 from datetime import datetime
 
 
 def cargar_datos():
-  datos = []
-  df = pd.read_csv("Video_Games_Sales.csv")
-  return df.values.tolist()
+
+    datos = []
+
+    archivo = open("Video_Games_Sales.csv", "r", encoding="utf-8")
+
+    lector = csv.reader(archivo)
+
+    next(lector)
+    for fila in lector:
+        datos.append(fila)
+
+    archivo.close()
+
+    return datos
+
 
 def guardar_hist(consulta, cantidad):
   archivo = open("historial.csv", "a", newline = "", encoding = "utf-8")
