@@ -44,19 +44,8 @@ def estadisticas(datos):
     else:
         promedio = 0
     return total, suma, promedio
-    print(f"\nTotal de videojuegos: {total}")
-    print(f"Ventas totales: {round(suma,2)} millones")
-    print(f"Promedio de ventas: {round(promedio,2)} millones")
-    print(f"Plataformas únicas: {len(plataformas)}")
 
-
-def filtrar(datos):
-    
-    print("Consolas: PS3, PS4, PS2, X360, XOne, PC, PSP, Wii")
-    
-    p = input("De las anteriores consolas ingresa la quieras filtrar: ").strip()
-    
-    contador = 0
+def filtrar(datos, plataforma):
     resultados = []
     
     for fila in datos:
@@ -65,8 +54,6 @@ def filtrar(datos):
                 print("Juego:", fila[0], 
                       "| Plataforma:", fila[1], 
                       "| Ventas:", fila[6])
-            
-                contador += 1
                 resultados.append(fila)
         except:
             continue
@@ -77,11 +64,7 @@ def filtrar(datos):
          print(f"\nTotal encontrado: {contador} registros.")
     return resultados
     
-def comparar(datos):
-
-    p1 = input("Ingrese la primera plataforma: ")
-    p2 = input("Ingrese la segunda plataforma: ")
-
+def comparar(datos, p1, p2):
     suma1 = 0
     suma2 = 0
 
@@ -103,24 +86,7 @@ def comparar(datos):
 
         except:
             continue
-        print("\n--- RESULTADOS ---")
-
-    if c1 > 0:
-        print(p1)
-        print("Cantidad:", c1)
-        print("Promedio ventas:", round(suma1 / c1, 2))
-
-    if c2 > 0:
-        print("\n" + p2)
-        print("Cantidad:", c2)
-        print("Promedio ventas:", round(suma2 / c2, 2))
-
-    if c1 == 0:
-        print("\nNo se encontraron juegos para", p1)
-
-    if c2 == 0:
-        print("\nNo se encontraron juegos para", p2)
-    return c1,suma1,c2,suma2    
+    return c1, suma1, c2, suma2    
 
 def grafico_cantidad(datos):
 
