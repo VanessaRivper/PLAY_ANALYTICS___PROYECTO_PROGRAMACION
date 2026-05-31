@@ -122,9 +122,9 @@ class Ventana(QWidget):
     p1 = partes[0].strip().lower()
     p2 = partes[1].strip().lower()    
 
-    c1, suma1, c2, suma2 =  comparar_plataformas_analisis(self.datos,p1,p2)
+    c1, suma1, c2, suma2 =  comparar(self.datos,p1,p2)
 
-    self.resultados_txt.claer()
+    self.resultados_txt.clear()
     self.resultados_txt.append("COMPARACIÓN\n")
     if c1 > 0:
       self.resultados_txt.append(f"{p1.upper()} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}")
@@ -138,10 +138,7 @@ class Ventana(QWidget):
 
 
   def mostrar_grafico(self):
-    datos = grafico_cantidad(self.datos)
-    
-    nombres = [item[0] for item in datos]
-    cantidades = [item[1] for item in datos]
+    nombres, cantidades = grafico_cantidad(self.datos)
     
     plt.figure(figsize=(10,5))
     plt.bar(nombres, cantidades, color ='#A9DFBF')
@@ -151,10 +148,7 @@ class Ventana(QWidget):
     plt.show()
     
   def mostrar_grafico_ventas(self):
-    datos = grafico_ventas(self.datos) 
-    
-    nombres = [item[0] for item in datos]
-    totales = [item[1] for item in datos]
+    nombres, totales = grafico_ventas(self.datos) 
 
     plt.figure(figsize=(10,5))
     plt.plot(nombres, totales, marker="o")
