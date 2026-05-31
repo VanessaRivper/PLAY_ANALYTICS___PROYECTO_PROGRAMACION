@@ -47,6 +47,7 @@ def estadisticas(datos):
 
 def filtrar(datos, p):
     resultados = []
+    contador = 0
     
     for fila in datos:
         try:
@@ -54,6 +55,7 @@ def filtrar(datos, p):
                 print("Juego:", fila[0], 
                       "| Plataforma:", fila[1], 
                       "| Ventas:", fila[6])
+                contador += 1
                 resultados.append(fila)
         except:
             continue
