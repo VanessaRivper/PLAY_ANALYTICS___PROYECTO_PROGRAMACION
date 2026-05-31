@@ -36,16 +36,3 @@ def guardar_csv(nombre, datos):
     escritor.writerow(fila)
   archivo.close()
 
-def ver_historial():
-  try:
-    archivo = open("historial.csv", "r", encoding="utf-8")
-    lector = csv.reader(archivo)
-    print("\n---- HISTORIAL ----")
-    for fila in lector:
-      if len(fila)>=3:
-        print("Fecha:", fila[0],
-              "| Consulta:", fila[1],
-              "| Resultados:", fila[2])
-    archivo.close()
-  except:
-    print("No hay historial guardado")
