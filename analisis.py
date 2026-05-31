@@ -43,7 +43,7 @@ def estadisticas(datos):
         promedio = suma / cantidad
     else:
         promedio = 0
-    return total, sema, promedio
+    return total, suma, promedio
     print(f"\nTotal de videojuegos: {total}")
     print(f"Ventas totales: {round(suma,2)} millones")
     print(f"Promedio de ventas: {round(promedio,2)} millones")
