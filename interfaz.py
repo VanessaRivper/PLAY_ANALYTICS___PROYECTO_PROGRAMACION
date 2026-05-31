@@ -82,14 +82,14 @@ class Ventana(QWidget):
             self.resultados_txt.append(f"Juego: {nombre:<42} | Plataforma: {fila[1]:<6} | Ventas: {fila[6]}")
 
   def mostrar_estadisticas(self):
-    total, suma, promedio = obtener_estadisticas(self.datos)
-
-        self.resultados_txt.clear()
-        self.resultados_txt.append("ESTADÍSTICAS\n")
-        self.resultados_txt.append(f"Total videojuegos: {total}")
-        self.resultados_txt.append(f"Ventas totales: {round(suma,2)} millones")
-        self.resultados_txt.append(f"Promedio ventas: {round(promedio,2)} millones")
-        guardar_hist("estadisticas", 1)
+    total, suma, promedio = estadisticas(self.datos)
+    
+    self.resultados_txt.clear()
+    self.resultados_txt.append("ESTADÍSTICAS\n")
+    self.resultados_txt.append(f"Total videojuegos: {total}")
+    self.resultados_txt.append(f"Ventas totales: {round(suma,2)} millones")
+    self.resultados_txt.append(f"Promedio ventas: {round(promedio,2)} millones")
+    guardar_hist("estadisticas", 1)
 
   def realizar_filtro(self):
     plataforma = self.entrada.text().strip()
@@ -115,26 +115,26 @@ class Ventana(QWidget):
       QMessageBox.warning(self,
                           "Advertencia",
                           "Ingrese dos plataformas separadas por coma.\nEjemplo: PS3,PS4"
-                         )
+      )
       return
-  
-      partes = texto.split(",")
-      p1 = partes[0].strip().lower()
-      p2 = partes[1].strip().lower()    
+            
+    partes = texto.split(",")
+    p1 = partes[0].strip().lower()
+    p2 = partes[1].strip().lower()    
 
-      c1, suma1, c2, suma2 =  comparar_plataformas_analisis(self.datos,p1,p2)
+    c1, suma1, c2, suma2 =  comparar_plataformas_analisis(self.datos,p1,p2)
 
-      selff.resultados_txt.claer()
-      self.resultados_txt.append("COMPARACIÓN\n")
-     if c1 > 0:
-       self.resultados_txt.append(f"{p1.upper()} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}")
-     else:
-       self.resultados_txt.append(f"{p1.upper()} -> No se encontraron registros.")
+    self.resultados_txt.claer()
+    self.resultados_txt.append("COMPARACIÓN\n")
+    if c1 > 0:
+      self.resultados_txt.append(f"{p1.upper()} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}")
+    else:
+      self.resultados_txt.append(f"{p1.upper()} -> No se encontraron registros.")
               
-     if c2 > 0:
-       self.resultados_txt.append(f"{p2.upper()} -> Juegos: {c2} | Promedio ventas: {round(suma2/c2,2)}")
-     else:
-       self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
+    if c2 > 0:
+      self.resultados_txt.append(f"{p2.upper()} -> Juegos: {c2} | Promedio ventas: {round(suma2/c2,2)}")
+    else:
+      self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
 
 
   def mostrar_grafico(self):
