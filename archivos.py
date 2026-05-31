@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 from datetime import datetime
 
 
@@ -6,11 +7,9 @@ def cargar_datos():
   
   datos = []
 
-  archivo = open("Video_Games_Sales.csv", "r", encoding = "utf-8")
+  df = pd.read_csv("Video_Games_Sales.csv")
 
-  lector = csv.reader(archivo)
-
-  next(lector)
+    return df.values.tolist()
 
   for fila in lector:
     datos.append(fila)
