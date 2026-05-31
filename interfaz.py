@@ -82,22 +82,7 @@ class Ventana(QWidget):
             self.resultados_txt.append(f"Juego: {nombre:<42} | Plataforma: {fila[1]:<6} | Ventas: {fila[6]}")
 
   def mostrar_estadisticas(self):
-        total = len(self.datos)
-        suma = 0
-        cantidad = 0
-
-        for fila in self.datos:
-            try:
-                suma += float(fila[6])
-                cantidad += 1
-            except:
-                continue
-
-        if cantidad > 0:
-          promedio = suma / cantidad
-        else:
-          promedio = 0
-          
+    total, suma, promedio = obtener_estadisticas(self.datos)
 
         self.resultados_txt.clear()
         self.resultados_txt.append("ESTADÍSTICAS\n")
@@ -107,134 +92,76 @@ class Ventana(QWidget):
         guardar_hist("estadisticas", 1)
 
   def realizar_filtro(self):
+    plataforma = self.entrada.text().strip()
+    if not plataforma:
+      QMessageBox.warning(self, 
+                          "Advertencia", 
+                          "Ingrese una plataforma"
+                         )
+      return
+    resultados = filtrar_plataforma(self.datos, plataforma)
+    self.resultados_txt.clear()
 
-        plataforma = self.entrada.text().strip()
-        if not plataforma:
-            QMessageBox.warning(
-                self,
-                "Advertencia",
-                "Ingrese una plataforma"
-            )
-            return
-
-        resultados = []
-
-        self.resultados_txt.clear()
-        for fila in self.datos:
-            try:
-                if plataforma.lower() in fila[1].lower():
-                    resultados.append(fila)
-                    self.resultados_txt.append(
-                        f"Juego: {fila[0]} | Plataforma: {fila[1]} | Ventas: {fila[6]}"
-                    )
-
-            except:
-                continue
-        self.resultados_txt.append(
-            f"\nTotal encontrados: {len(resultados)}"
-        )
-        self.ultimos_resultados = resultados
-        guardar_hist("filtro", len(resultados))
+    for fila in resultados:
+      self.resultados_txt.append(f"Juego: {fila[0]} | Plataforma: {fila[1]} | Ventas: {fila[6]}")
+      
+    self.resultados_txt.append(f"\nTotal encontrados: {len(resultados)}")
+    self.ultimos_resultados = resultados
+    guardar_hist("filtro", len(resultados))
 
   def comparar_plataformas(self):
-
-        texto = self.entrada.text().strip()
-        if "," not in texto:
-            QMessageBox.warning(
-                self,
-                "Advertencia",
-                "Ingrese dos plataformas separadas por coma.\nEjemplo: PS3,PS4"
-            )
-            return
+    texto = self.entrada.text().strip()
+    if "," not in texto:
+      QMessageBox.warning(self,
+                          "Advertencia",
+                          "Ingrese dos plataformas separadas por coma.\nEjemplo: PS3,PS4"
+                         )
+      return
   
-        partes = texto.split(",")
-        p1 = partes[0].strip().lower()
-        p2 = partes[1].strip().lower()
-        suma1, suma2 = 0, 0
-        c1, c2 = 0, 0
+      partes = texto.split(",")
+      p1 = partes[0].strip().lower()
+      p2 = partes[1].strip().lower()    
 
-        for fila in self.datos:
-            try:
-                plataforma = fila[1].lower()
-                ventas = float(fila[6])
-                if p1 == plataforma: 
-                    suma1 += ventas
-                    c1 += 1
-                elif p2  == plataforma: 
-                    suma2 += ventas
-                    c2 += 1
-            except:
-                continue
+      c1, suma1, c2, suma2 =  comparar_plataformas_analisis(self.datos,p1,p2)
 
-        self.resultados_txt.clear()
-        self.resultados_txt.append("COMPARACIÓN\n")
-        if c1 > 0:
-              self.resultados_txt.append(f"{p1.upper()} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}")
-        else:
-              self.resultados_txt.append(f"{p1.upper()} -> No se encontraron registros.")
+      selff.resultados_txt.claer()
+      self.resultados_txt.append("COMPARACIÓN\n")
+     if c1 > 0:
+       self.resultados_txt.append(f"{p1.upper()} -> Juegos: {c1} | Promedio ventas: {round(suma1/c1,2)}")
+     else:
+       self.resultados_txt.append(f"{p1.upper()} -> No se encontraron registros.")
               
-        if c2 > 0:
-              self.resultados_txt.append(f"{p2.upper()} -> Juegos: {c2} | Promedio ventas: {round(suma2/c2,2)}")
-        else:
-              self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
+     if c2 > 0:
+       self.resultados_txt.append(f"{p2.upper()} -> Juegos: {c2} | Promedio ventas: {round(suma2/c2,2)}")
+     else:
+       self.resultados_txt.append(f"{p2.upper()} -> No se encontraron registros.")
 
 
   def mostrar_grafico(self):
-
-        plataformas = {}
-        
-        for fila in self.datos:
-            try:
-                plataforma = fila[1]
-                if plataforma in plataformas:
-                    plataformas[plataforma] += 1
-                else:
-                    plataformas[plataforma] = 1
-            except:
-                continue
-
-        plataformas_ordenadas = sorted(plataformas.items(), key=lambda x: x[1], reverse=True)[:10]
-        nombres = [item[0] for item in plataformas_ordenadas]
-        cantidades = [item[1] for item in plataformas_ordenadas]
-        plt.figure(figsize=(10,5))
-        plt.bar(nombres, cantidades, color ='#A9DFBF')
-        plt.title("Cantidad de videojuegos por plataforma")
-        plt.xlabel("Plataformas")
-        plt.ylabel("Cantidad de titulos")
-        plt.show()
+    datos = datos_grafico_cantidad(self.datos)
+    
+    nombres = [item[0] for item in datos]
+    cantidades = [item[1] for item in datos]
+    
+    plt.figure(figsize=(10,5))
+    plt.bar(nombres, cantidades, color ='#A9DFBF')
+    plt.title("Cantidad de videojuegos por plataforma")
+    plt.xlabel("Plataformas")
+    plt.ylabel("Cantidad de titulos")
+    plt.show()
     
   def mostrar_grafico_ventas(self):
+    datos = datos_grafico_ventas(self.datos) 
+    
+    nombres = [item[0] for item in datos]
+    totales = [item[1] for item in datos]
 
-        ventas = {}
-
-        for fila in self.datos:
-          try:
-            plataforma = fila[1]
-            venta = float(fila[6])
-
-            if plataforma in ventas:
-                ventas[plataforma] += venta
-            else:
-                ventas[plataforma] = venta
-
-          except:
-            continue
-
-        ventas_ordenadas = sorted(
-            ventas.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )[:10]
-
-        nombres = [item[0] for item in ventas_ordenadas]
-        totales = [item[1] for item in ventas_ordenadas]
-
-        plt.figure(figsize=(10,5))
-        plt.plot(nombres, totales, marker="o")
-        plt.title("Ventas totales por plataforma")
-        plt.xlabel("Plataformas")
-        plt.ylabel("Ventas")
-        plt.show()
+    plt.figure(figsize=(10,5))
+    plt.plot(nombres, totales, marker="o")
+    plt.title("Ventas totales por plataforma")
+    plt.xlabel("Plataformas")
+    plt.ylabel("Ventas")
+    plt.show()
 
   def mostrar_historial(self):
 
@@ -242,31 +169,20 @@ class Ventana(QWidget):
 
     try:
         archivo = open("historial.csv", "r", encoding="utf-8")
-
         self.resultados_txt.append("HISTORIAL\n")
-
         for linea in archivo:
             self.resultados_txt.append(linea.strip())
-
         archivo.close()
-
     except:
         self.resultados_txt.append("No hay historial guardado")
 
   def exportar_csv(self):
-
     try:
         guardar_csv("Resultados.csv", self.ultimos_resultados)
-
-        QMessageBox.information(
-            self,
+        QMessageBox.information(self,
             "Éxito",
-            "Resultados exportados correctamente"
-        )
-
+            "Resultados exportados correctamente")
     except:
-        QMessageBox.warning(
-            self,
+        QMessageBox.warning(self,
             "Error",
-            "No hay resultados para exportar"
-        )
+            "No hay resultados para exportar")
