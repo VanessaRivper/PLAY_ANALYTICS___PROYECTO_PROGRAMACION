@@ -43,7 +43,7 @@ def estadisticas(datos):
         promedio = suma / cantidad
     else:
         promedio = 0
-    
+    return total, sema, promedio
     print(f"\nTotal de videojuegos: {total}")
     print(f"Ventas totales: {round(suma,2)} millones")
     print(f"Promedio de ventas: {round(promedio,2)} millones")
@@ -89,9 +89,7 @@ def comparar(datos):
     c2 = 0
 
     for fila in datos:
-
         try:
-
             plataforma = fila[1]
             ventas = float(fila[6])
 
@@ -122,6 +120,7 @@ def comparar(datos):
 
     if c2 == 0:
         print("\nNo se encontraron juegos para", p2)
+    return c1,suma1,c2,suma2    
 
 def grafico_cantidad(datos):
 
